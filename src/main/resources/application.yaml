@@ -16,8 +16,14 @@ server:
     enabled: true
     mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
 
-http:
-  port: 8888
+#控制配置类是否加载
+config:
+  #是否开启开启http2https
+  http2https: false
+
+#开启http2https时使用，http.port将重定向到server.port
+#http:
+#  port: 8888
 
 spring:
   jackson:
