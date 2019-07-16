@@ -4,6 +4,7 @@ import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
@@ -13,8 +14,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Http2HttpsConfig {
 
+	@Value("${http.port}")
+	private Integer httpPort;
+	@Value("${server.port}")
+	private Integer serverPort;
+
 	@Bean
 	public ServletWebServerFactory servletContainer() {
+
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {//1
 
 			protected void postProcessContext(Context context) {
@@ -35,9 +42,9 @@ public class Http2HttpsConfig {
 	public Connector httpConnector() {//2
 		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 		connector.setScheme("http");
-		connector.setPort(9090);
+		connector.setPort(httpPort);
 		connector.setSecure(false);
-		connector.setRedirectPort(8443);
+		connector.setRedirectPort(serverPort);
 		return connector;
 	}
 }
