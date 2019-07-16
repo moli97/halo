@@ -21,22 +21,22 @@ import java.io.IOException;
  */
 public class CorsFilter extends GenericFilterBean {
 
-    private final static String ALLOW_HEADERS = StringUtils.joinWith(",", HttpHeaders.CONTENT_TYPE, AdminAuthenticationFilter.ADMIN_TOKEN_HEADER_NAME);
+	private final static String ALLOW_HEADERS = StringUtils.joinWith(",", HttpHeaders.CONTENT_TYPE, AdminAuthenticationFilter.ADMIN_TOKEN_HEADER_NAME);
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-        // Set customized header
-        httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, httpServletRequest.getHeader(HttpHeaders.ORIGIN));
-        httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, ALLOW_HEADERS);
-        httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
-        httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
-        httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
+		// Set customized header
+		httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*" /**httpServletRequest.getHeader(HttpHeaders.ORIGIN)*/);
+		httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, ALLOW_HEADERS);
+		httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+		httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+		httpServletResponse.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
 
-        if (!CorsUtils.isPreFlightRequest(httpServletRequest)) {
-            chain.doFilter(httpServletRequest, httpServletResponse);
-        }
-    }
+		if (!CorsUtils.isPreFlightRequest(httpServletRequest)) {
+			chain.doFilter(httpServletRequest, httpServletResponse);
+		}
+	}
 }

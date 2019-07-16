@@ -1,5 +1,8 @@
 server:
   port: 8090
+  #  ssl:
+  #    key-store: 2489805_www.moli97.top.pfx
+  #    key-store-password: MaEbndmy
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -12,6 +15,10 @@ server:
   compression:
     enabled: true
     mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+http:
+  port: 8888
+
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -21,26 +28,26 @@ spring:
     ansi:
       enabled: always
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    #    type: com.zaxxer.hikari.HikariDataSource
 
     # H2 Database 配置
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/.halo/db/halo
-    username: admin
-    password: 123456
+    #    driver-class-name: org.h2.Driver
+    #    url: jdbc:h2:file:~/.halo/db/halo
+    #    username: admin
+    #    password: 123456
 
     # MySQL 配置
-  #  driver-class-name: com.mysql.cj.jdbc.Driver
-  #  url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-  #  username: root
-  #  password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
 
-  h2:
-    console:
-      settings:
-        web-allow-others: false
-      path: /h2-console
-      enabled: false
+  #  h2:
+  #    console:
+  #      settings:
+  #        web-allow-others: false
+  #      path: /h2-console
+  #      enabled: false
   jpa:
     hibernate:
       ddl-auto: update
