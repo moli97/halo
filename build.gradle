@@ -77,6 +77,7 @@ dependencies {
     implementation 'com.vladsch.flexmark:flexmark-html-parser:0.42.12'
 
     compile group: 'org.apache.tomcat', name: 'tomcat-catalina-ha', version: '9.0.20'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
     
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
